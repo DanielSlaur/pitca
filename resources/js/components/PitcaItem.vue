@@ -1,26 +1,50 @@
 <script>
 import {defineComponent} from 'vue'
 import PButton from "@/components/PButton.vue";
-
+import { mapStores } from 'pinia'
+import { useCartStore } from '../store'
 export default defineComponent({
     name: "PitcaItem",
+    props:{
+        pizza:{
+            type: Object,
+            // required: true
+            default:{
+                title: 'test',
+                price: 400
+            }
+        }
+    },
     components: {PButton},
+    data(){
+        return {
+            count: 0
+        }
+    },
+    computed: {
+        ...mapStores(useCartStore)
+    },
+    methods:{
+        addToCart(){
+            this.cartStore.addToCart(this.pizza)
+        }
+    }
 
 })
 </script>
 
 <template>
 
-    <div class="pizza-block">
+    <div>
         <img
             src="https://dodopizza-a.akamaihd.net/static/Img/Products/27c9bbd0af3a4d1d84a086d9c2f1656d_292x292.webp"
             alt="Pizza"
-            class="pizza-block__image"
+
         />
-        <h4 class="pizza-block__title">{{ title }}</h4>
-        <div class="pizza-block__bottom" @click="addToCart()">
-            <div class="pizza-block__price">от {{ price }} ₽</div>
-            <div class="button button--outline button--add">
+        <h4 >{{ pizza.title }}</h4>
+        <div >
+            <div >от {{ pizza.price }} ₽</div>
+            <div >
                 <svg
                     fill="none"
                     height="12"
@@ -33,7 +57,7 @@ export default defineComponent({
                         fill="white"
                     />
                 </svg>
-                <p-button class="hover:bg-orange-300 ">Добавить</p-button>
+                <p-button class="hover:bg-orange-300 " @click="addToCart">Добавить</p-button>
                 <i v-if="count">{{ count }}</i>
             </div>
         </div>
