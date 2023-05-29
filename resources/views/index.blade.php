@@ -6,9 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pitca App</title>
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body>
-
-<script src="{{ asset('js/app.js') }}"></script>
+    <div id="app">
+        <example-component></example-component>
+    </div>
 </body>
 </html>
