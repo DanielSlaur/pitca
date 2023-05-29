@@ -26,6 +26,10 @@ export default defineComponent({
     methods:{
         closeCart(){
             this.cartStore.closeCart()
+        },
+        goToOrder(){
+            this.$router.push('/order')
+            this.cartStore.closeCart()
         }
     }
 })
@@ -49,8 +53,8 @@ export default defineComponent({
             <div class="absolute inset-0 overflow-hidden">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                     <div class="pointer-events-auto w-screen max-w-md">
-                        <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                            <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                        <div class="flex h-full flex-col bg-white shadow-xl">
+                            <div class="flex-1 overflow-hidden px-4 py-6 sm:px-6 flex flex-col">
                                 <div class="flex items-start justify-between">
                                     <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Корзина</h2>
                                     <div class="ml-3 flex h-7 items-center">
@@ -63,13 +67,9 @@ export default defineComponent({
                                     </div>
                                 </div>
 
-                                <div class="mt-8">
+                                <div class="mt-8 pr-5 overflow-y-auto">
                                     <div class="flow-root">
-                                        <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                            <li v-for="pizza in pizzas">
-                                                <pizza-item-cart :pizza="pizza"></pizza-item-cart>
-                                            </li>
-                                        </ul>
+                                        <pizza-item-cart v-for="pizza in cartStore.pizzas" :pizza="pizza"></pizza-item-cart>
                                     </div>
                                 </div>
                             </div>
@@ -77,10 +77,10 @@ export default defineComponent({
                             <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                     <p>Итого</p>
-                                    <p>{{ cartStore.priceTotal }}  ₽</p>
+                                    <p>{{ cartStore.priceTotal }} ₽</p>
                                 </div>
                                 <div class="mt-6 flex justify-center">
-                                    <p-button>Оформить заказ</p-button>
+                                    <p-button @click="goToOrder()">Оформить заказ</p-button>
                                 </div>
                             </div>
                         </div>
