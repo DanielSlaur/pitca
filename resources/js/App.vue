@@ -13,6 +13,14 @@ export default defineComponent({
     <router-view></router-view>
 </template>
 
-<style scoped>
+<style >
+#app{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
+body{
+    height: unset;
+}
 </style>

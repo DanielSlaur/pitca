@@ -26,7 +26,7 @@ export const useCartStore = defineStore('cart', {
         },
 
         deleteFromCart(payload){
-            this.pizzas.slice(payload)
+            this.pizzas.splice(0, 1)
         },
 
         openCart(){
