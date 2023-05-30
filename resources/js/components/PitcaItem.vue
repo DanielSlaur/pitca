@@ -44,8 +44,8 @@ export default defineComponent({
             alt="Pizza"
 
         />
-        <h4 >{{ pizza.title }}</h4>
-        <div>{{ pizza.description}}</div>
+        <h4 class="text-lg font-semibold">{{ pizza.title }}</h4>
+        <div class="text-gray-500">{{ pizza.description}}</div>
         <div >
             <div >от {{ pizza.price }} ₽</div>
             <div >
