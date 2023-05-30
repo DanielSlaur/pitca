@@ -27,9 +27,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <header>
-        <Navbar></Navbar>
-    </header>
+    <Navbar></Navbar>
     <div class="flex flex-column justify-around mt-10">
         <div  class="w-1/3">
             <OrderCard >
@@ -48,10 +46,15 @@ export default defineComponent({
                 <PButton>Оформить заказ</PButton>
             </div>
         </div>
-        <OrderCard class="w-1/2">
+        <OrderCard class="w-1/2 flex flex-col">
             <span class="font-semibold">Состав заказа</span>
-            <div>
+            <div class="flex-1">
                 <PizzaItemOrder v-for="pizza in cartStore.pizzas" :pizza="pizza"></PizzaItemOrder>
+            </div>
+            <hr>
+            <div class="mt-5 flex justify-between">
+                <span>Сумма заказа</span>
+                <span class="font-semibold">{{ cartStore.priceTotal}} ₽</span>
             </div>
         </OrderCard>
     </div>

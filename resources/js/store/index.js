@@ -17,16 +17,31 @@ export const useCartStore = defineStore('cart', {
         },
 
         priceTotal(state){
-            return state.pizzas.map(p=>p.price).reduce((accumulator, current)=> accumulator + current, 0)
+            return state.pizzas.map(p=>p.price * p.count).reduce((accumulator, current)=> accumulator + current, 0)
         }
     },
     actions: {
         addToCart(payload) {
-            this.pizzas.push(payload)
+            let finded = this.pizzas.find(el=>el.id === payload.id)
+            if(finded === undefined){
+                payload.count = 1
+                this.pizzas.push(payload)
+            }else {
+                finded.count++
+            }
         },
 
         deleteFromCart(payload){
-            this.pizzas.splice(0, 1)
+            this.pizzas = this.pizzas.filter(el=> el.id !== payload.id)
+        },
+
+
+        decreaseCount(payload){
+            let finded = this.pizzas.find(el=>el.id === payload.id)
+            finded.count--
+            if(finded.count === 0){
+                this.deleteFromCart(payload)
+            }
         },
 
         openCart(){

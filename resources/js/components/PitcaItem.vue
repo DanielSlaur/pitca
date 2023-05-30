@@ -25,9 +25,10 @@ export default defineComponent({
     computed: {
         ...mapStores(useCartStore)
     },
+    mounted(){
+    },
     methods:{
         addToCart(){
-            this.pizza.count++
             this.cartStore.addToCart(this.pizza)
         }
     }
@@ -39,11 +40,12 @@ export default defineComponent({
 
     <div>
         <img
-            src="https://dodopizza-a.akamaihd.net/static/Img/Products/27c9bbd0af3a4d1d84a086d9c2f1656d_292x292.webp"
+            :src="pizza.thumbnail"
             alt="Pizza"
 
         />
         <h4 >{{ pizza.title }}</h4>
+        <div>{{ pizza.description}}</div>
         <div >
             <div >от {{ pizza.price }} ₽</div>
             <div >
