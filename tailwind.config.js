@@ -6,6 +6,18 @@ export default {
         "./resources/**/*.vue",
     ],
   theme: {
+    fontFamily :{
+        mono: [
+            'ui-monospace',
+            // 'SFMono-Regular',
+            // 'Menlo',
+            // 'Monaco',
+            // 'Consolas',
+            // '"Liberation Mono"',
+            // '"Courier New"',
+            'monospace',
+        ],
+    },
     extend: {},
   },
   plugins: [],
