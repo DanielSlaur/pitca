@@ -11,7 +11,8 @@ export default defineComponent({
             // required: true
             default:{
                 title: 'test',
-                price: 400
+                price: 400,
+                count: 0
             }
         }
     },
@@ -26,6 +27,7 @@ export default defineComponent({
     },
     methods:{
         addToCart(){
+            this.pizza.count++
             this.cartStore.addToCart(this.pizza)
         }
     }
