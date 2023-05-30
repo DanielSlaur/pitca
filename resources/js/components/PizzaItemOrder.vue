@@ -30,11 +30,11 @@ export default defineComponent({
             <div>
                 <div class="flex justify-between text-base font-medium text-gray-900">
                     <h3>
-                        <a href="#">{{pizza.title}}</a>
+                        <span >{{pizza.title}}</span>
                     </h3>
                     <p class="ml-4">{{pizza.price}} ₽</p>
                 </div>
-                <!--                <p class="mt-1 text-sm text-gray-500">Salmon</p>-->
+                <p class="mt-1 text-sm text-gray-500">{{ pizza.description }}</p>
             </div>
             <div class="flex flex-1 items-end justify-between text-sm">
                 <p class="text-gray-500">Количество: {{pizza.count}}</p>

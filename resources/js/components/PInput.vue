@@ -2,7 +2,9 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-    name: "Input"
+    name: "Input",
+    props:['modelValue'],
+    emits: ['update:modelValue'],
 })
 </script>
 
@@ -14,7 +16,7 @@ export default defineComponent({
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="appearance-none border border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-orange-500" id="inline-full-name" type="text" value="" placeholder="">
+            <input class="appearance-none border border-gray-300 focus:outline-none focus:border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:ring-orange-500" id="inline-full-name" type="text" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" placeholder="">
         </div>
     </div>
 </template>
