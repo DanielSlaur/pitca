@@ -40,12 +40,10 @@ export default {
 </script>
 
 <template>
-    <header>
-        <Navbar>
-            <p-button class="flex items-center" @click="openCart()">Корзина <span v-if="cartStore.count > 0" class="withItems"></span> <span v-if="cartStore.count > 0" class="ml-2 mr-2">{{cartStore.count}} </span></p-button>
-        </Navbar>
-    </header>
-    <div class=" flex  flex-wrap justify-between items-center mx-auto max-w-screen-xl mt-5">
+    <Navbar>
+        <p-button class="flex items-center" @click="openCart()">Корзина <span v-if="cartStore.count > 0" class="withItems"></span> <span v-if="cartStore.count > 0" class="ml-2 mr-2">{{cartStore.count}} </span></p-button>
+    </Navbar>
+    <div class=" flex flex-wrap justify-start items-center mx-auto max-w-screen-xl mt-5 gap-2 mb-5">
         <pitca-item v-for="pizza in pizzas" :pizza="pizza"></pitca-item>
         <cart></cart>
     </div>
@@ -58,5 +56,9 @@ export default {
         margin: 0px 12px;
         background: rgb(255, 255, 255);
         opacity: 0.4;
+    }
+    .gridable::after {
+        content: "";
+        flex: auto;
     }
 </style>
