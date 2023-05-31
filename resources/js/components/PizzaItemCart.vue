@@ -41,7 +41,7 @@ export default defineComponent({
                     <h3>
                         <span >{{pizza.title}}</span>
                     </h3>
-                    <span class="ml-4">{{pizza.price}} ₽</span>
+                    <span class="ml-4">{{pizza.price * pizza.count}} ₽</span>
                 </div>
                 <p class="mt-1 text-sm text-gray-500">{{ pizza.description }}</p>
             </div>
