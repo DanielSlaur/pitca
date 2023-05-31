@@ -8,6 +8,7 @@ import {mapStores} from "pinia";
 import {useCartStore} from "@/store/index.js";
 import PButton from "@/components/PButton.vue";
 import PRadio from "@/components/PRadio.vue";
+import axios from 'axios'
 
 export default defineComponent({
     name: "OrderPage",
@@ -39,6 +40,16 @@ export default defineComponent({
         },
         makeOrder(){
             console.log(this.userData, this.paymentMethod)
+            axios.post('/api/orders', {...this.userData, paymentMethod: this.paymentMethod.choosed, totalPrice: this.cartStore.priceTotal, pizzasIds: this.cartStore.pizzas.map(el=> el.id)}, {
+                headers:{
+                    "Content-type": "application/json"
+                }
+            }).then(res=>{
+                if(res.data.status){
+                    alert('Oki doki')
+                }
+                console.log(res)
+            })
         }
     }
 })
