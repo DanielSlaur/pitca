@@ -1,5 +1,5 @@
-import MainPage from "@/components/MainPage.vue";
-import OrderPage from "@/components/OrderPage.vue";
+import MainPage from "@/pages/MainPage.vue";
+import OrderPage from "@/pages/OrderPage.vue";
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
