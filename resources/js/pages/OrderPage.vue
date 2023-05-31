@@ -26,6 +26,14 @@ export default defineComponent({
                 cash: 'cash',
                 card: 'card',
                 choosed: ''
+            },
+            modal:{
+                visible: false,
+                text: "Ваш заказ успешно создан! \r\nОжидайте доставки, приятного аппетита! :)"
+            },
+            warning:{
+                visible: false,
+                text: "Заполните все поля!"
             }
         }
     },
@@ -46,10 +54,26 @@ export default defineComponent({
                 }
             }).then(res=>{
                 if(res.data.status){
-                    alert('Oki doki')
+                    this.modal.visible = true
+                }else{
+                    this.warning.visible = true
                 }
                 console.log(res)
             })
+        },
+
+        closeModal(){
+            this.modal.visible = false
+            this.$router.push('/')
+            this.clearCart()
+        },
+
+        clearCart(){
+            this.cartStore.clearCart()
+        },
+
+        closeWarning(){
+            this.warning.visible = false
         }
     }
 })
@@ -57,7 +81,7 @@ export default defineComponent({
 
 <template>
     <Navbar></Navbar>
-    <div class="flex flex-column justify-around mt-10">
+    <div class="flex justify-around mt-10">
         <div  class="w-1/3">
             <OrderCard >
                 <div>
@@ -91,6 +115,12 @@ export default defineComponent({
             </div>
         </OrderCard>
     </div>
+    <PModal :visible="modal.visible" @close="closeModal">
+        {{ modal.text }}
+    </PModal>
+    <PModal :visible="warning.visible" @close="closeWarning">
+        {{ warning.text }}
+    </PModal>
 </template>
 
 <style scoped>

@@ -3,7 +3,7 @@ import PButton from "@/components/PButton.vue";
 import PitcaItem from "@/components/PitcaItem.vue";
 import {ref} from "vue";
 import Cart from "@/components/Cart.vue";
-import { useCartStore } from '../store'
+import { useCartStore } from '../store/index.js'
 import {mapStores} from "pinia";
 import Navbar from "@/components/Navbar.vue";
 import axios from 'axios'
