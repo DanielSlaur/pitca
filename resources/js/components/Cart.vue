@@ -42,16 +42,6 @@ export default defineComponent({
         enter-active-class="transition duration-300"
         leave-active-class="transition duration-300">
         <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" v-if="cartStore.visible">
-            <!--
-              Background backdrop, show/hide based on slide-over state.
-
-              Entering: "ease-in-out duration-500"
-                From: "opacity-0"
-                To: "opacity-100"
-              Leaving: "ease-in-out duration-500"
-                From: "opacity-100"
-                To: "opacity-0"
-            -->
             <div class="fixed inset-0 bg-black bg-opacity-30 transition-opacity"></div>
 
             <div class="fixed inset-0 overflow-hidden">
