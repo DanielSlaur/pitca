@@ -82,7 +82,7 @@ export default defineComponent({
                     />
                 </svg>
                 <div class="flex justify-between items-center">
-                    <p-button :disabled="inCart" class="hover:bg-orange-300 " @click="addToCart"> {{ inCart ? 'Добавлено' : 'Добавить' }}</p-button>
+                    <PButton :disabled="inCart" class="hover:bg-orange-300 " @click="addToCart"> {{ inCart ? 'Добавлено' : 'Добавить' }}</PButton>
 
                     <transition  enter-from-class="opacity-0"
                                  enter-active-class="transition duration-300">
