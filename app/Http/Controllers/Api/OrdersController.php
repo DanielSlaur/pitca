@@ -17,12 +17,16 @@ class OrdersController extends Controller
                 'phone' => ['required'],
                 'address' => ['required'],
                 'paymentMethod' => ['required'],
-                'totalPrice' => ['required']
+                'totalPrice' => ['required'],
+                'pizzasIds' => ['required']
             ]
         );
 
         if($validator->fails()){
-            return $validator->messages();
+            return response()->json([
+                "status"=>false,
+                "message"=>$validator->messages()
+            ])->setStatusCode(400);
         }
 
         $order = Orders::create([
