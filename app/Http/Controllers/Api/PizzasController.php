@@ -11,4 +11,16 @@ class PizzasController extends Controller
     public function index(){
         return Pizzas::all();
     }
+
+    public function show($id){
+        $pizza = Pizzas::find($id);
+        if(!$pizza){
+            return response()->json([
+                "status"=>false,
+                "message"=>"Pizza not found"
+            ])->setStatusCode(404);
+        }
+
+        return $pizza;
+    }
 }
