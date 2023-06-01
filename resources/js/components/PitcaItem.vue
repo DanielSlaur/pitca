@@ -19,16 +19,36 @@ export default defineComponent({
     components: {PButton},
     data(){
         return {
-            count: 0
+
         }
     },
     computed: {
-        ...mapStores(useCartStore)
+        ...mapStores(useCartStore),
+
+        inCart(){
+            return this.cartStore.pizzas.some(el=>el.id === this.pizza.id)
+        },
+
+        count(){
+            if(this.inCart){
+                let pizzaCart = this.cartStore.pizzas.find(el=>el.id === this.pizza.id)
+                return pizzaCart.count
+            }
+            return false
+
+        }
     },
     mounted(){
     },
     methods:{
         addToCart(){
+            this.cartStore.addToCart(this.pizza)
+        },
+
+        descreaseAmount(){
+            this.cartStore.decreaseCount(this.pizza)
+        },
+        increaseAmount(){
             this.cartStore.addToCart(this.pizza)
         }
     }
@@ -41,7 +61,7 @@ export default defineComponent({
     <div>
         <img
             :src="pizza.thumbnail"
-            alt="Pizza"
+            alt="pizziNetu"
 
         />
         <h4 class="text-lg font-semibold">{{ pizza.title }}</h4>
@@ -61,8 +81,20 @@ export default defineComponent({
                         fill="white"
                     />
                 </svg>
-                <p-button class="hover:bg-orange-300 " @click="addToCart">Добавить</p-button>
-                <i v-if="count">{{ count }}</i>
+                <div class="flex justify-between items-center">
+                    <p-button :disabled="inCart" class="hover:bg-orange-300 " @click="addToCart"> {{ inCart ? 'Добавлено' : 'Добавить' }}</p-button>
+
+                    <transition  enter-from-class="opacity-0"
+                                 enter-active-class="transition duration-300">
+                        <div v-if="inCart" class="flex justify-between items-center ">
+                            <span class="text-xs mr-2" >Количество: {{ count }}</span>
+                            <div class="flex ">
+                                <button class="rounded-full bg-gray-300 py-1 px-4 hover:bg-gray-200 transition" @click="descreaseAmount">-</button>
+                                <button class="rounded-full text-sm bg-gray-300 py-1 px-4 hover:bg-gray-200 transition" @click="increaseAmount">+</button>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
             </div>
         </div>
     </div>

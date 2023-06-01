@@ -32,7 +32,7 @@ export default defineComponent({
 <template>
     <div class="flex mb-5">
         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-            <img :src="pizza.thumbnail" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
+            <img :src="pizza.thumbnail" alt="pizziNetu" class="h-full w-full object-cover object-center">
         </div>
 
         <div class="ml-4 flex flex-1 flex-col">

@@ -44,7 +44,11 @@ export default {
         <p-button class="flex items-center" @click="openCart()">Корзина <span v-if="cartStore.count > 0" class="withItems"></span> <span v-if="cartStore.count > 0" class="ml-2 mr-2">{{cartStore.count}} </span></p-button>
     </Navbar>
     <div class=" flex flex-wrap justify-start items-center mx-auto max-w-screen-xl mt-5 gap-2 mb-5">
-        <pitca-item v-for="pizza in pizzas" :pizza="pizza"></pitca-item>
+
+        <transition-group  enter-from-class="opacity-0"
+                     enter-active-class="transition duration-300">
+            <pitca-item v-for="pizza in pizzas" :pizza="pizza" :key="pizza.id"></pitca-item>
+        </transition-group>
         <cart></cart>
     </div>
 </template>
