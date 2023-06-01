@@ -8,6 +8,7 @@ import {mapStores} from "pinia";
 import {useCartStore} from "@/store/index.js";
 import PButton from "@/components/PButton.vue";
 import PRadio from "@/components/PRadio.vue";
+import axios from 'axios'
 
 export default defineComponent({
     name: "OrderPage",
@@ -25,6 +26,14 @@ export default defineComponent({
                 cash: 'cash',
                 card: 'card',
                 choosed: ''
+            },
+            modal:{
+                visible: false,
+                text: "Ваш заказ успешно создан! \r\nОжидайте доставки, приятного аппетита! :)"
+            },
+            warning:{
+                visible: false,
+                text: "Заполните все поля!"
             }
         }
     },
@@ -39,6 +48,32 @@ export default defineComponent({
         },
         makeOrder(){
             console.log(this.userData, this.paymentMethod)
+            axios.post('/api/orders', {...this.userData, paymentMethod: this.paymentMethod.choosed, totalPrice: this.cartStore.priceTotal, pizzasIds: this.cartStore.pizzas.map(el=> el.id)}, {
+                headers:{
+                    "Content-type": "application/json"
+                }
+            }).then(res=>{
+                if(res.data.status){
+                    this.modal.visible = true
+                }else{
+                    this.warning.visible = true
+                }
+                console.log(res)
+            })
+        },
+
+        closeModal(){
+            this.modal.visible = false
+            this.$router.push('/')
+            this.clearCart()
+        },
+
+        clearCart(){
+            this.cartStore.clearCart()
+        },
+
+        closeWarning(){
+            this.warning.visible = false
         }
     }
 })
@@ -46,7 +81,7 @@ export default defineComponent({
 
 <template>
     <Navbar></Navbar>
-    <div class="flex flex-column justify-around mt-10">
+    <div class="flex justify-around mt-10">
         <div  class="w-1/3">
             <OrderCard >
                 <div>
@@ -80,6 +115,12 @@ export default defineComponent({
             </div>
         </OrderCard>
     </div>
+    <PModal :visible="modal.visible" @close="closeModal">
+        {{ modal.text }}
+    </PModal>
+    <PModal :visible="warning.visible" @close="closeWarning">
+        {{ warning.text }}
+    </PModal>
 </template>
 
 <style scoped>

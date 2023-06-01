@@ -50,6 +50,10 @@ export const useCartStore = defineStore('cart', {
 
         closeCart(){
             this.visible = false
+        },
+
+        clearCart(){
+            this.pizzas = []
         }
     },
 })
