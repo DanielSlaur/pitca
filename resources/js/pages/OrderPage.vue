@@ -53,12 +53,9 @@ export default defineComponent({
                     "Content-type": "application/json"
                 }
             }).then(res=>{
-                if(res.data.status){
-                    this.modal.visible = true
-                }else{
-                    this.warning.visible = true
-                }
-                console.log(res)
+                this.modal.visible = true
+            }).catch(e=>{
+                this.warning.visible = true
             })
         },
 
